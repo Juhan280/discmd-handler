@@ -1,0 +1,39 @@
+import fs from "node:fs";
+import node_path from "node:path";
+
+export function getAliases(aliases: string | string[] | undefined) {
+	if (!aliases) return [];
+	let a: string[];
+	if (typeof aliases === "string") a = [aliases.trim()];
+	else a = aliases.map(x => x.trim());
+	return a;
+}
+
+export function getCategory(path: string, category?: string) {
+	if (category) return category;
+	const splits = path.split(node_path.sep);
+	return splits.slice(splits.indexOf("commands") + 2, -1).join("-");
+}
+
+export function getUsage(usage?: string | string[]) {
+	if (!usage) return [];
+	if (typeof usage === "string") return [usage];
+	return usage.map(u => u.trim());
+}
+
+export function getIdFromPath(root: string, path: string) {
+	const name = path.replace(root, "").replace(/-/g, "-").replace(/\.js$/, "");
+
+	return Buffer.from(name).toString("base64").replace(/=+$/, "");
+}
+
+export async function getDefaultExport(path: string): Promise<unknown> {
+	const module = await import(path);
+	return module.__esModule ? module.default?.default : module.default;
+}
+
+export function getPath(root: string, commandsDir: string) {
+	const path = node_path.join(root, commandsDir);
+	if (!fs.existsSync(path)) throw new Error("path does not exist");
+	return path;
+}
