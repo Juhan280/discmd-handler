@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    if: ${{ git.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
