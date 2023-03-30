@@ -204,7 +204,7 @@ This code should be in a seperate file. You should only run it when you want to 
 import { registerApplicationCommands } from "discmd-handler";
 
 registerApplicationCommands({
-  token: process.env.DISCORD_TOKEN!,
+  token: process.env.DISCORD_TOKEN,
   commands: {
     ChatInputCommands: "commands/chat-input",
   },
@@ -257,10 +257,10 @@ The `satisfies` keyword in typescript is introduced in version `4.9`. If you are
 
 ```ts
 const command: ChatInputCommandInterface = {
-	data: ...,
-	execute(interaction) {
-		....
-	},
+  data: ...,
+  execute(interaction) {
+    ....
+  },
 }
 export default command;
 ```
