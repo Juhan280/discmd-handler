@@ -1,6 +1,6 @@
 {
   "name": "discmd-handler",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "discmd-handler is a lightweight and flexible command handler for Discord.js bots that simplifies the process of creating and managing commands.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
