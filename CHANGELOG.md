@@ -1,5 +1,11 @@
 # discmd-handler
 
+## 1.1.1
+
+### Patch Changes
+
+- e286ae9: fixed readme
+
 ## 1.1.0
 
 ### Minor Changes
