@@ -33,6 +33,7 @@
   },
   "homepage": "https://Juhan280.github.io/discmd-handler",
   "dependencies": {
+    "chalk": "^4.1.2",
     "fast-glob": "^3.2.12",
     "zod": "^3.21.4"
   },

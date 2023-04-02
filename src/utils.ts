@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import node_path from "node:path";
+import { LogLevel } from "./enums";
 
 export function getAliases(aliases: string | string[] | undefined) {
 	if (!aliases) return [];
@@ -36,4 +37,23 @@ export function getPath(root: string, commandsDir: string) {
 	const path = node_path.join(root, commandsDir);
 	if (!fs.existsSync(path)) throw new Error("path does not exist");
 	return path;
+}
+
+export class Logger {
+	constructor(public logLevel: LogLevel) {}
+
+	table(tabularData?: unknown, properties?: string[] | undefined) {
+		if (this.logLevel < LogLevel.TABLE) return;
+		console.table(tabularData, properties);
+	}
+
+	error(...data: unknown[]) {
+		if (this.logLevel < LogLevel.ERROR) return;
+		console.log(...data);
+	}
+
+	verbose(...data: unknown[]) {
+		if (this.logLevel < LogLevel.VERBOSE) return;
+		console.log(...data);
+	}
 }
