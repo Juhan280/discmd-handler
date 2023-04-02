@@ -29,34 +29,29 @@
 <br/>
 
 <blockquote>
-<p>This package has not been tested on Windows and is not currently compatible with Windows operating systems. If you&#39;re interested in helping to make it work on Windows, we welcome contributions and pull requests!</p>
+<p>While this package has not been tested on Windows, we encourage you to try it out and let us know of any issues you encounter. We value your feedback and would love to work with you to improve compatibility with Windows. If you&#39;re interested in contributing to this effort, we welcome your input and pull requests!</p>
 </blockquote>
 
 <a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
   <h2>Table of contents</h2>
 </a>
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#installation">Installation</a><ul>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#install">Install</a></li>
-</ul>
-</li>
-<li><a href="#basic-usage">Basic usage</a></li>
-<li><a href="#other-commands">Other commands</a><ul>
-<li><a href="#message-command">Message Command</a></li>
-<li><a href="#button-command">Button Command</a></li>
-<li><a href="#select-menu-command">Select Menu Command</a></li>
-</ul>
-</li>
-<li><a href="#registering-slash-commands">Registering Slash Commands</a></li>
-<li><a href="#guides-and-concepts">Guides and concepts</a><ul>
-<li><a href="#working-with-commonjs-or-typescript">Working with CommonJs or TypeScript</a></li>
-<li><a href="#error-handling">Error handling</a></li>
-</ul>
-</li>
-<li><a href="#changelog">Changelog</a></li>
-</ul>
+<details>
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Install](#install)
+- [Basic usage](#basic-usage)
+- [Other commands](#other-commands)
+  - [Message Command](#message-command)
+  - [Button Command](#button-command)
+  - [Select Menu Command](#select-menu-command)
+- [Registering Slash Commands](#registering-slash-commands)
+- [Guides and concepts](#guides-and-concepts)
+  - [Working with CommonJs or TypeScript](#working-with-commonjs-or-typescript)
+  - [Error handling](#error-handling)
+- [Changelog](#changelog)
+</details>
+
 
 <a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
   <h2>Introduction</h2>
@@ -120,7 +115,7 @@
   <h2>Registering Slash Commands</h2>
 </a>
 <p>This code should be in a seperate file. You should only run it when you want to register slash commands.</p>
-<pre><code class="language-js"><span class="hl-3">import</span><span class="hl-0"> { </span><span class="hl-4">registerApplicationCommands</span><span class="hl-0"> } </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;discmd-handler&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-8">registerApplicationCommands</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-9">token</span><span class="hl-0">: </span><span class="hl-6">process</span><span class="hl-0">.</span><span class="hl-6">env</span><span class="hl-0">.</span><span class="hl-4">DISCORD_TOKEN</span><span class="hl-7">!</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-9">commands</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-9">ChatInputCommands</span><span class="hl-0">: </span><span class="hl-1">&quot;commands/chat-input&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">  </span><span class="hl-2">// Omit this option if you want to register global commands</span><br/><span class="hl-0">  </span><span class="hl-9">guildId</span><span class="hl-0">: </span><span class="hl-1">&quot;guild id of the dev server&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
+<pre><code class="language-js"><span class="hl-3">import</span><span class="hl-0"> { </span><span class="hl-4">registerApplicationCommands</span><span class="hl-0"> } </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;discmd-handler&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-8">registerApplicationCommands</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-9">token</span><span class="hl-0">: </span><span class="hl-6">process</span><span class="hl-0">.</span><span class="hl-6">env</span><span class="hl-0">.</span><span class="hl-4">DISCORD_TOKEN</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-9">commands</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-9">ChatInputCommands</span><span class="hl-0">: </span><span class="hl-1">&quot;commands/chat-input&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">  </span><span class="hl-2">// Omit this option if you want to register global commands</span><br/><span class="hl-0">  </span><span class="hl-9">guildId</span><span class="hl-0">: </span><span class="hl-1">&quot;guild id of the dev server&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
 
 <a href="#guides-and-concepts" id="guides-and-concepts" style="color: inherit; text-decoration: none;">
@@ -146,7 +141,7 @@
 <pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-0"> { </span><span class="hl-4">SlashCommandBuilder</span><span class="hl-0"> } </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;discord.js&quot;</span><span class="hl-0">;</span><br/><span class="hl-3">import</span><span class="hl-0"> { </span><span class="hl-4">ChatInputCommandInterface</span><span class="hl-0"> } </span><span class="hl-3">from</span><span class="hl-0"> </span><span class="hl-1">&quot;discmd-handler&quot;</span><span class="hl-0">;</span><br/><br/><span class="hl-3">export</span><span class="hl-0"> </span><span class="hl-3">default</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-9">data</span><span class="hl-0">: </span><span class="hl-3">new</span><span class="hl-0"> </span><span class="hl-8">SlashCommandBuilder</span><span class="hl-0">()</span><br/><span class="hl-0">    .</span><span class="hl-8">setName</span><span class="hl-0">(</span><span class="hl-1">&quot;ping&quot;</span><span class="hl-0">)</span><br/><span class="hl-0">    .</span><span class="hl-8">setDescription</span><span class="hl-0">(</span><span class="hl-1">&quot;Replies with pong!&quot;</span><span class="hl-0">),</span><br/><span class="hl-0">  </span><span class="hl-8">execute</span><span class="hl-0">(</span><span class="hl-9">interaction</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-6">interaction</span><span class="hl-0">.</span><span class="hl-8">reply</span><span class="hl-0">(</span><span class="hl-1">&quot;Pong!&quot;</span><span class="hl-0">);</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">} </span><span class="hl-3">satisfies</span><span class="hl-0"> </span><span class="hl-10">ChatInputCommandInterface</span><span class="hl-0">;</span>
 </code></pre>
 <p>The <code>satisfies</code> keyword in typescript is introduced in version <code>4.9</code>. If you are using older version, your code should look like this instead.</p>
-<pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">command</span><span class="hl-15">:</span><span class="hl-0"> </span><span class="hl-10">ChatInputCommandInterface</span><span class="hl-0"> </span><span class="hl-7">=</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-9">data</span><span class="hl-0">: </span><span class="hl-15">...</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-8">execute</span><span class="hl-0">(</span><span class="hl-9">interaction</span><span class="hl-0">) {</span><br/><span class="hl-0">        </span><span class="hl-15">...</span><span class="hl-0">.</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">}</span><br/><span class="hl-3">export</span><span class="hl-0"> </span><span class="hl-3">default</span><span class="hl-0"> </span><span class="hl-4">command</span><span class="hl-0">;</span>
+<pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-6">command</span><span class="hl-15">:</span><span class="hl-0"> </span><span class="hl-10">ChatInputCommandInterface</span><span class="hl-0"> </span><span class="hl-7">=</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-9">data</span><span class="hl-0">: </span><span class="hl-15">...</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-8">execute</span><span class="hl-0">(</span><span class="hl-9">interaction</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-15">...</span><span class="hl-0">.</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">}</span><br/><span class="hl-3">export</span><span class="hl-0"> </span><span class="hl-3">default</span><span class="hl-0"> </span><span class="hl-4">command</span><span class="hl-0">;</span>
 </code></pre>
 
 <a href="#error-handling" id="error-handling" style="color: inherit; text-decoration: none;">
