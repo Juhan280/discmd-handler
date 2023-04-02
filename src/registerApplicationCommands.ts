@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import {
 	REST,
 	RESTPostAPIChatInputApplicationCommandsJSONBody,
@@ -6,7 +7,7 @@ import {
 import fg from "fast-glob";
 import { ZodError } from "zod";
 import { LogLevel } from "./enums";
-import { getDefaultExport, getPath } from "./utils";
+import { getDefaultExport, getPath, Logger } from "./utils";
 import {
 	chatInputCommandSchema,
 	applicationCommandsRegisterOptionsSchema,
@@ -58,7 +59,7 @@ export async function registerApplicationCommands(
 	options: ChatInputCommandsRegisterOptions
 ) {
 	applicationCommandsRegisterOptionsSchema.parse(options);
-	const logLevel = options.logLevel ?? LogLevel.ERROR;
+	const logger = new Logger(options.logLevel ?? LogLevel.ERROR);
 
 	const applicationIdInBase64 = options.token.split(".")[0];
 	if (typeof applicationIdInBase64 !== "string") throw new Error(); // this will never throw
@@ -73,7 +74,11 @@ export async function registerApplicationCommands(
 		getPath(process.cwd(), options.commands.ChatInputCommands) +
 			"/**/*.{js,cjs,mjs}"
 	)) {
+		logger.verbose(chalk.hex("#837300")("Opening"), chalk.gray(path));
+
 		const data = await getDefaultExport(path).catch(err => {
+			logger.verbose(chalk.hex("#ff2052")("Failed to open"), chalk.gray(path));
+
 			if (err instanceof Error)
 				(err as Error & { sourcePath: string }).sourcePath = path;
 			errors.push(err);
@@ -85,9 +90,22 @@ export async function registerApplicationCommands(
 			const error = parsed.error as ZodError & { sourcePath: string };
 			error.sourcePath = path;
 			errors.push(error);
+
+			logger.verbose(chalk.hex("#ff2052")("Failed to load"));
 			continue;
 		}
-		if (parsed.data.disabled) continue;
+		if (parsed.data.disabled) {
+			logger.verbose(
+				chalk.hex("#4458BE")(parsed.data.data.name),
+				"is disabled"
+			);
+			continue;
+		}
+
+		logger.verbose(
+			chalk.green("Loaded"),
+			chalk.hex("#4458BE")(parsed.data.data.name)
+		);
 
 		commands.push(parsed.data.data.toJSON());
 	}
@@ -96,14 +114,21 @@ export async function registerApplicationCommands(
 	if (options.guildId)
 		route = Routes.applicationGuildCommands(applicationId, options.guildId);
 	else route = Routes.applicationCommands(applicationId);
+
+	logger.verbose(
+		chalk.hex("#837300")(
+			`\nRegistering ${
+				options.guildId ? "local" : "global"
+			} application commands...`
+		)
+	);
 	await rest.put(route, { body: commands });
 
-	if (logLevel >= LogLevel.ERROR) console.log(...errors);
-	if (logLevel >= LogLevel.TABLE)
-		console.table({
-			Loaded: commands.length,
-			Errors: errors.length,
-		});
+	if (errors.length) logger.error(...errors);
+	logger.table({
+		Registered: commands.length,
+		Errors: errors.length,
+	});
 
 	return { commands, errors };
 }

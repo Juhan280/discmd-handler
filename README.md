@@ -14,10 +14,11 @@
 <br/>
 <br/>
 
-> This package has not been tested on Windows and is not currently compatible with Windows operating systems. If you're interested in helping to make it work on Windows, we welcome contributions and pull requests!
+> While this package has not been tested on Windows, we encourage you to try it out and let us know of any issues you encounter. We value your feedback and would love to work with you to improve compatibility with Windows. If you're interested in contributing to this effort, we welcome your input and pull requests!
 
 ## Table of contents
 
+<details>
 - [Introduction](#introduction)
 - [Installation](#installation)
   - [Requirements](#requirements)
@@ -32,6 +33,7 @@
   - [Working with CommonJs or TypeScript](#working-with-commonjs-or-typescript)
   - [Error handling](#error-handling)
 - [Changelog](#changelog)
+</details>
 
 ## Introduction
 
