@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import node_path from "node:path";
+import normalize from "normalize-path";
 import { LogLevel } from "./enums";
 
 export function getAliases(aliases: string | string[] | undefined) {
@@ -36,7 +37,7 @@ export async function getDefaultExport(path: string): Promise<unknown> {
 export function getPath(root: string, commandsDir: string) {
 	const path = node_path.join(root, commandsDir);
 	if (!fs.existsSync(path)) throw new Error("path does not exist");
-	return path;
+	return normalize(path);
 }
 
 export class Logger {
