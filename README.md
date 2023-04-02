@@ -19,6 +19,7 @@
 ## Table of contents
 
 <details>
+
 - [Introduction](#introduction)
 - [Installation](#installation)
   - [Requirements](#requirements)
@@ -33,6 +34,7 @@
   - [Working with CommonJs or TypeScript](#working-with-commonjs-or-typescript)
   - [Error handling](#error-handling)
 - [Changelog](#changelog)
+
 </details>
 
 ## Introduction
