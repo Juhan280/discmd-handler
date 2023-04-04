@@ -260,13 +260,12 @@ export default {
 The `satisfies` keyword in typescript is introduced in version `4.9`. If you are using older version, your code should look like this instead.
 
 ```ts
-const command: ChatInputCommandInterface = {
+export default <ChatInputCommandInterface>{
   data: ...,
   execute(interaction) {
     ....
   },
 }
-export default command;
 ```
 
 ### Error handling
