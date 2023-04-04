@@ -82,6 +82,7 @@ export interface MessageCommandInterface extends CommandInterface {
 	 * @param metadata Represents the metadata of a message command.
 	 */
 	execute: (
+		this: MessageCommand,
 		data: MessageCommandData,
 		metadata: MessageCommandMetadata
 	) => unknown;
@@ -128,6 +129,7 @@ export class MessageCommand extends Command {
 	 * @param metadata Represents the metadata of a message command.
 	 */
 	execute: (
+		this: this,
 		data: MessageCommandData,
 		metadata: MessageCommandMetadata
 	) => unknown;

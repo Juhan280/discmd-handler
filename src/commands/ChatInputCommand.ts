@@ -20,7 +20,10 @@ export interface ChatInputCommandInterface extends CommandInterface {
 	 *
 	 * @param interaction The interaction that triggered the command.
 	 */
-	execute: (interaction: ChatInputCommandInteraction) => unknown;
+	execute: (
+		this: ChatInputCommand,
+		interaction: ChatInputCommandInteraction
+	) => unknown;
 }
 
 /** Represents a chat input command. */
@@ -51,7 +54,7 @@ export class ChatInputCommand extends Command {
 	 *
 	 * @param interaction The interaction that triggered the command.
 	 */
-	execute: (interaction: ChatInputCommandInteraction) => unknown;
+	execute: (this: this, interaction: ChatInputCommandInteraction) => unknown;
 
 	/**
 	 * Creates a new instance of `ChatInputCommand`.

@@ -12,7 +12,11 @@ export interface ButtonCommandInterface extends CommandInterface {
 	 * @param interaction The interaction that triggered the command.
 	 * @param metadata The part of the customId after the first "#".
 	 */
-	execute: (interaction: ButtonInteraction, metadata: string | null) => unknown;
+	execute: (
+		this: ButtonCommand,
+		interaction: ButtonInteraction,
+		metadata: string | null
+	) => unknown;
 }
 
 export class ButtonCommand extends Command {
@@ -37,7 +41,11 @@ export class ButtonCommand extends Command {
 	 * @param interaction The interaction that triggered the command.
 	 * @param metadata The part of the customId after the first "#".
 	 */
-	execute: (interaction: ButtonInteraction, metadata: string | null) => unknown;
+	execute: (
+		this: this,
+		interaction: ButtonInteraction,
+		metadata: string | null
+	) => unknown;
 
 	constructor(cmd: ButtonCommandInterface, path: string, id: string) {
 		super(path);

@@ -13,6 +13,7 @@ export interface SelectMenuCommandInterface extends CommandInterface {
 	 * @param metadata The part of the customId after the first "#".
 	 */
 	execute: (
+		this: SelectMenuCommand,
 		interaction: AnySelectMenuInteraction,
 		metadata: string | null
 	) => unknown;
@@ -41,6 +42,7 @@ export class SelectMenuCommand extends Command {
 	 * @param metadata The part of the customId after the first "#".
 	 */
 	execute: (
+		this: this,
 		interaction: AnySelectMenuInteraction,
 		metadata: string | null
 	) => unknown;
