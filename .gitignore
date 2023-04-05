@@ -1,5 +1,9 @@
 /lib
 
+# npm and yarn lock files
+package-lock.json
+yarn.lock
+
 # Logs
 logs
 *.log
