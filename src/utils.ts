@@ -11,10 +11,9 @@ export function getAliases(aliases: string | string[] | undefined) {
 	return a;
 }
 
-export function getCategory(path: string, category?: string) {
+export function getCategory(root: string, path: string, category?: string) {
 	if (category) return category;
-	const splits = path.split(node_path.sep);
-	return splits.slice(splits.indexOf("commands") + 2, -1).join("-");
+	return path.replace(root, "").split(node_path.sep).slice(1, -1).join("-");
 }
 
 export function getUsage(usage?: string | string[]) {
@@ -24,7 +23,7 @@ export function getUsage(usage?: string | string[]) {
 }
 
 export function getIdFromPath(root: string, path: string) {
-	const name = path.replace(root, "").replace(/-/g, "-").replace(/\.js$/, "");
+	const name = path.replace(root, "").replace(/\.js$/, "");
 
 	return Buffer.from(name).toString("base64").replace(/=+$/, "");
 }

@@ -8,7 +8,7 @@ import {
 	TextBasedChannel,
 	User,
 } from "discord.js";
-import { getAliases, getCategory, getUsage } from "../utils";
+import { getAliases, getUsage } from "../utils";
 import { Command, CommandInterface } from "./BaseCommand";
 
 /** Represents the data available for a message command. */
@@ -141,7 +141,12 @@ export class MessageCommand extends Command {
 	 * @param path - The path to the file where the command is located.
 	 * @param id - The unique identifier for the command.
 	 */
-	constructor(cmd: MessageCommandInterface, path: string, id: string) {
+	constructor(
+		cmd: MessageCommandInterface,
+		path: string,
+		category: string,
+		id: string
+	) {
 		super(path);
 
 		this.id = id;
@@ -149,7 +154,7 @@ export class MessageCommand extends Command {
 		this.aliases = getAliases(cmd.aliases);
 		this.usage = getUsage(cmd.usage);
 		this.description = cmd.description || null;
-		this.category = getCategory(path, cmd.category);
+		this.category = category;
 		this.alwaysExecute = !!cmd.alwaysExecute;
 		this.allowBots = !!cmd.allowBots;
 		this.insensitive = cmd.insensitive ?? true;

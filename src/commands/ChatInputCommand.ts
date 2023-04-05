@@ -4,7 +4,6 @@ import {
 	SlashCommandBuilder,
 	SlashCommandSubcommandsOnlyBuilder,
 } from "discord.js";
-import { getCategory } from "../utils";
 import { Command, CommandInterface } from "./BaseCommand";
 
 /** Represents the structure of a chat input command. */
@@ -63,7 +62,12 @@ export class ChatInputCommand extends Command {
 	 * @param path The path of the file where this command is located.
 	 * @param id The unique id of the command.
 	 */
-	constructor(cmd: ChatInputCommandInterface, path: string, id: string) {
+	constructor(
+		cmd: ChatInputCommandInterface,
+		path: string,
+		category: string,
+		id: string
+	) {
 		super(path);
 
 		this.id = id;
@@ -72,7 +76,7 @@ export class ChatInputCommand extends Command {
 		this.data = cmd.data.toJSON();
 		this.disabled = !!cmd.disabled;
 		this.metadata = cmd.metadata;
-		this.category = getCategory(path, cmd.category);
+		this.category = category;
 		this.execute = cmd.execute;
 	}
 }

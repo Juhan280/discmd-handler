@@ -1,5 +1,4 @@
 import { AnySelectMenuInteraction } from "discord.js";
-import { getCategory } from "../utils";
 import { Command, CommandInterface } from "./BaseCommand";
 
 export interface SelectMenuCommandInterface extends CommandInterface {
@@ -47,14 +46,19 @@ export class SelectMenuCommand extends Command {
 		metadata: string | null
 	) => unknown;
 
-	constructor(cmd: SelectMenuCommandInterface, path: string, id: string) {
+	constructor(
+		cmd: SelectMenuCommandInterface,
+		path: string,
+		category: string,
+		id: string
+	) {
 		super(path);
 
 		this.id = id;
 		this.name = cmd.name;
 		this.disabled = !!cmd.disabled;
 		this.metadata = cmd.metadata;
-		this.category = getCategory(path, cmd.category);
+		this.category = category;
 		this.execute = cmd.execute;
 	}
 }
