@@ -13,7 +13,7 @@ export function getAliases(aliases: string | string[] | undefined) {
 
 export function getCategory(root: string, path: string, category?: string) {
 	if (category) return category;
-	return path.replace(root, "").split(node_path.sep).slice(1, -1).join("-");
+	return path.replace(root, "").split("/").slice(1, -1).join("-");
 }
 
 export function getUsage(usage?: string | string[]) {
