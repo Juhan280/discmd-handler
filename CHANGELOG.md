@@ -1,5 +1,12 @@
 # discmd-handler
 
+## 1.1.2
+
+### Patch Changes
+
+- 0cd9b57: fixed `category` property not working properly in some scenarios
+- 19ee4bf: fixed type of `this` keyword inside `execute` function
+
 ## 1.1.1
 
 ### Patch Changes
