@@ -3,15 +3,19 @@ import { Collection } from "discord.js";
 import fg from "fast-glob";
 import { z, ZodError } from "zod";
 import { LogLevel } from "./enums";
-import { getDefaultExport, getIdFromPath, Logger } from "./utils";
+import { getCategory, getDefaultExport, getIdFromPath, Logger } from "./utils";
 
 export default async function loadCommands<T>(
 	sourcePath: string,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	CommandClass: new (cmd: any, path: string, id: string) => T & {
+	CommandClass: new (
+		cmd: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+		path: string,
+		category: string,
+		id: string
+	) => T & {
 		name: string;
 	},
-	schema: z.ZodType<object>,
+	schema: z.ZodType<{ category?: string }>,
 	logLevel: LogLevel
 ) {
 	const logger = new Logger(logLevel);
@@ -45,7 +49,8 @@ export default async function loadCommands<T>(
 		}
 
 		const id = getIdFromPath(sourcePath, path);
-		const command = new CommandClass(parsed.data, path, id);
+		const category = getCategory(sourcePath, path, parsed.data.category);
+		const command = new CommandClass(parsed.data, path, category, id);
 		commands.set(id, command);
 
 		logger.verbose(
